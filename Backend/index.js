@@ -1,6 +1,7 @@
+//  INITIALIZE EXPRESS //
 const express = require('express');
 // ROUTES //
-const route = require('./controllers');
+const route = require('./routes/routes.js')
 //  CORS //
 const cors = require('cors');
 //  PORT //
@@ -8,7 +9,7 @@ const port = parseInt(process.env.PORT) || 4000;
 //  EXPRESS APP //
 const app = express();
 //  MIDDLEWARE //
-const{errorHandling} = require('./Backend/middleware/ErrorHandling');
+const{errorHandling} = require('./middleware/ErrorHandling');
 // FOR SECURITY
 const cookieParser = require('cookie-parser');
 
@@ -20,6 +21,7 @@ app.use((req, res, next)=> {
     res.header('Access-Control-Allow-Headers', '*')
     next();
 });
+// FOR CORS, ROUTER //
 app.use(route);
 app.use(
     cors(),
