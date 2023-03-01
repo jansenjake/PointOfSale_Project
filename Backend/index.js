@@ -5,7 +5,7 @@ const route = require('./routes/routes.js')
 //  CORS //
 const cors = require('cors');
 //  PORT //
-const port = parseInt(process.env.PORT) || 4000;
+const port = parseInt(process.env.PORT) || 8080;
 //  EXPRESS APP //
 const app = express();
 //  MIDDLEWARE //
@@ -25,7 +25,6 @@ app.use((req, res, next)=> {
 app.use(route);
 app.use(
     cors(),
-
     cookieParser(),
     express.json,
     express.urlencoded({extended: false})
