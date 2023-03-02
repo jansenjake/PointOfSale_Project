@@ -1,15 +1,15 @@
 //  INITIALIZE EXPRESS //
 const express = require('express');
 // ROUTES //
-const route = require('./routes/routes.js')
+const route = require('./Backend/routes/routes.js')
 //  CORS //
 const cors = require('cors');
 //  PORT //
-const port = parseInt(process.env.PORT) || 3000;
+const port = parseInt(process.env.PORT) || 8080;
 //  EXPRESS APP //
 const app = express();
 //  MIDDLEWARE //
-const{errorHandling} = require('./middleware/ErrorHandling');
+const{errorHandling} = require('./Backend/middleware/ErrorHandling');
 // FOR SECURITY
 const cookieParser = require('cookie-parser');
 

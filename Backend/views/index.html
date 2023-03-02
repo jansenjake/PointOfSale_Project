@@ -8,5 +8,73 @@
 </head>
 <body>
     
+    <h2>Route Description</h2>
+    <table>
+        <thead>
+            <th>Method</th>
+            <th>Path</th>
+            <th>Description</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>01</td>
+                <td>get</td>
+                <td>/</td>
+                <td>Takes you to the home page (index.html)</td>
+            </tr>
+            <tr>
+                <td>02</td>
+                <td>post</td>
+                <td>/users/login</td>
+                <td>login account</td>
+            </tr>
+            <tr>
+                <td>03</td>
+                <td>get</td>
+                <td>/users</td>
+                <td>returns users array</td>
+            </tr>
+            <tr>
+                <td>04</td>
+                <td>get</td>
+                <td>/users/user:ID</td>
+                <td>returns object of user with matching userID</td>
+            </tr>
+            <tr>
+                <td>05</td>
+                <td>put</td>
+                <td>/users/user:ID</td>
+                <td>updates user details with matching ID</td>
+            </tr>
+            <tr>
+                <td>06</td>
+                <td>post</td>
+                <td>/register</td>
+                <td>encrypts password user inserts, saves user successfully in 
+                    relevant database, returns JSON web token to frontend.
+                </td>
+            </tr>
+            <tr>
+                <td>07</td>
+                <td>delete</td>
+                <td>/users/user:ID</td>
+                <td>removes user from database.</td>
+            </tr>
+            <tr>
+                <td>08</td>
+                <td>delete</td>
+                <td>/products</td>
+                <td>shows all products from database.</td>
+            </tr>
+            <tr>
+                <td>09</td>
+                <td>delete</td>
+                <td>/products/product:id</td>
+                <td>shows a product from database with matching ID.</td>
+            </tr>
+
+        </tbody>
+    </table>
+
 </body>
 </html>
