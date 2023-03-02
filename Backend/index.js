@@ -5,7 +5,7 @@ const route = require('./routes/routes.js')
 //  CORS //
 const cors = require('cors');
 //  PORT //
-const port = parseInt(process.env.PORT) || 8080;
+const port = parseInt(process.env.PORT) || 3000;
 //  EXPRESS APP //
 const app = express();
 //  MIDDLEWARE //

@@ -17,12 +17,12 @@ class User {
     login (req, res) {
         const {
             emailAdd, 
-            userPwd
+            userPass
         } = req.body;
         const strQry = 
         `
         SELECT firstName, lastName, gender, emailAdd, 
-        userPwd, userRole, userProfile
+        userPass, userRole, userProfile
         FROM Users
         WHERE emailAdd = '${emailAdd}';
         `;
@@ -32,15 +32,15 @@ class User {
                 res.status(401).json({ err: 
                   "You have privided a wrong email address."})
             } else {
-                await compare(userPwd,
-                    data[0].userPwd,
+                await compare(userPass,
+                    data[0].userPass,
                     (cErr, cResult)=> {
                         if (cErr) throw cErr;
                         //  create a token
                         const jwToken =
                         createToken(
                             {
-                                emailAdd, userPwd
+                                emailAdd, userPass
                             }
                         );
                         // SAVING
@@ -68,17 +68,18 @@ class User {
         const strQry = 
         `
         SELECT userID, firstName, lastName, gender,
-        cellPhoneNumber, emailAdd, usrRole, userProfile, joinDate
+        cellPhoneNumber, emailAdd, userRole, userProfile, joinDate
         FROM Users;
         `;
         // database
         db.query(strQry, (err, data)=> {
+            console.log(data);
             if (err) throw err;
             else res.status(200).json(
                 {results:data} );
         })
     }
-    fetchUsers(req, res) {
+    fetchUser(req, res) {
         const strQry =
         `
         SELECT userID, firstName, lastName, gender, cellPhoneNumber,
@@ -98,12 +99,12 @@ class User {
         //  payload --> info user inserts
         let detail = req.body;
         //  HASHING USER PASSWORD
-      detail.userPwd = await
-      hash(detail.userPwd, 15);
+      detail.userPass = await
+      hash(detail.userPass, 15);
     //   authentication info
     let user = {
         emailAdd: detail.emailAdd,
-        userPwd: detail.userPwd
+        userPass: detail.userPass
     }
     //  SQL QUERY //
     const strQry =
@@ -129,9 +130,9 @@ class User {
     }
     updateUser(req, res) {
         let data = req.body;
-        if (data.userPwd !== null ||
-            data.userPwd !== undefined)
-            data.userPwd = hashSync(data.userPwd, 15);
+        if (data.userPass !== null ||
+            data.userPass !== undefined)
+            data.userPass = hashSync(data.userPass, 15);
         const strQry = 
         `
         UPDATE Users 
