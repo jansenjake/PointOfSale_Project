@@ -139,7 +139,7 @@ class User {
         WHERE userID = ?;
         `;
         //  database
-        db.query(strQry, [data, req.params.id],,
+        db.query(strQry, [data, req.params.id],
             (err)=> {
                 if (err) throw err;
                 res.status(200).json( {
@@ -162,4 +162,92 @@ class User {
                     } )
                 });
         }
+}
+
+// PRODUCT //
+class Product {
+    // GET ALL PRODUCTS //
+    fetchProducts(req, res) {
+        const strQry = `
+        SELECT 
+        id, prodName, prodDescription, 
+        category, price, prodQuantity, imgURL
+        FROM Products;`;
+        db.query(strQry, (err, results)=> {
+            if(err) throw err;
+            res.status(200).json({results: results})
+        });
+    }
+    //  GET A SINGLE PRODUCT //
+    fetchProduct(req, res) {
+        const strQry = 
+        `SELECT 
+        id, prodName, prodDescription, 
+        category, price, prodQuantity, imgURL
+        FROM Products
+        WHERE id = ?;
+        `;
+        db.query(strQry, [req.params.id], (err, results)=> {
+            if(err) throw err;
+            res.status(200).json({results: results})
+        });
+
+    }
+    // CREATE A PRODUCT //
+    addProduct(req, res) {
+        const strQry = 
+        `
+        INSERT INTO Products
+        SET ?;
+        `;
+        db.query(strQry,[req.body],
+            (err)=> {
+                if(err){
+                    res.status(400).json({err: "Unable to insert a new record."});
+                }else {
+                    res.status(200).json({msg: "A product was saved"});
+                }
+            }
+        );    
+
+    }
+    //  UPDATE A PRODUCT //
+    updateProduct(req, res) {
+        const strQry = 
+        `
+        UPDATE Products
+        SET ?
+        WHERE id = ?
+        `;
+        db.query(strQry,[req.body, req.params.id],
+            (err)=> {
+                if(err){
+                    res.status(400).json({err: "Unable to update a record."});
+                }else {
+                    res.status(200).json({msg: "A product was updated"});
+                }
+            }
+        );    
+
+    }
+
+    // DELETE A PRODUCT //  
+    deleteProduct(req, res) {
+        const strQry = 
+        `
+        DELETE FROM Products
+        WHERE id = ?;
+        `;
+        db.query(strQry,[req.params.id], (err)=> {
+            if(err) res.status(400).json({err: "The record was not found."});
+            res.status(200).json({msg: "A product was deleted."});
+        })
+    }
+
+}
+
+// EXPORT USER AND PRODUCTS CLASS //
+module.exports = {
+    User, 
+    Product
 }
